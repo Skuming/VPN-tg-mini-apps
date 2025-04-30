@@ -1,3 +1,10 @@
+p {
+  color: var(--tg-theme-text-color);
+}
 .tg__btn {
-  background-color: var(--tg-theme-button-color);
+  background: var(--tg-theme-button-color);
+}
+
+.tg__section {
+  background: var(--tg-theme-section-bg-color);
 }

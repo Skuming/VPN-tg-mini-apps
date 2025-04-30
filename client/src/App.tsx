@@ -1,13 +1,10 @@
 import "./App.css";
+import Home from "./pages/Home";
+// import InitUser from "../services/telegram";
+// import axios from "axios"; <--- connect when backend is ready
 
 function App() {
-  return (
-    <>
-      <button className="h-12 border-2 w-12 m-4 cursor-pointer tg__btn">
-        gd
-      </button>
-    </>
-  );
+  return <Home />;
 }
 
 export default App;

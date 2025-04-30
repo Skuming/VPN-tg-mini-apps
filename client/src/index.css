@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+#root {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  justify-content: space-between;
+  background: var(--tg-theme-secondary-bg-color);
+}
