@@ -1,1 +1,1 @@
-{"root":["./server.ts"],"version":"5.7.3"}
+{"root":["./server.ts","./db/db.ts","./db/pool.ts","./handlers/validate.ts"],"version":"5.7.3"}
