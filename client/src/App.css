@@ -1,10 +1,22 @@
-p {
+.tg__txt {
   color: var(--tg-theme-text-color);
+  font-weight: 600;
+  -webkit-text-stroke: 0.3px #a0a0a0;
 }
 .tg__btn {
-  background: var(--tg-theme-button-color);
+  background-color: var(--tg-theme-button-color);
 }
 
 .tg__section {
-  background: var(--tg-theme-section-bg-color);
+  background-color: var(--tg-theme-section-bg-color);
+}
+
+.tg__header {
+  background-color: var(--tg-theme-header-bg-color);
+}
+
+.tg__btn__txt {
+  color: var(--tg-theme-button-text-color);
+  font-size: 16px;
+  font-weight: 600;
 }

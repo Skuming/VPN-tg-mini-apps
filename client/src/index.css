@@ -1,11 +1,12 @@
 @import "tailwindcss";
-
 #root {
-  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 100vh;
   justify-content: space-between;
-  background: var(--tg-theme-secondary-bg-color);
+  background-color: var(--tg-theme-secondary-bg-color);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
+  touch-action: none;
 }
