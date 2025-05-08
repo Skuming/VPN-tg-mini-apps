@@ -13,8 +13,7 @@
 So when im started i think that i can do the whole interface out of my mind, spoiler, i dropped that idea, so i learned how [figma](figma.com) works
 ### And [that`s my figma](https://www.figma.com/design/LRZzHhSnOH1rpdaOSTLpck/Untitled)
 
-![image](https://github.com/user-attachments/assets/8dfd8c41-d0ed-4062-bef0-c72a1a39d8dd)
-
+![image](https://github.com/user-attachments/assets/b2ad2ff2-095b-48f0-a69b-cfe1002e1d45)
 
 # Soooooooooooo sya!
 
