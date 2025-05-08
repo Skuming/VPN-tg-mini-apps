@@ -19,7 +19,7 @@ app.post("/api/validate", async (req: Request, res: Response) => {
         ...userDBInfo,
         photo_url: validateResult.user.photo_url,
         first_name: validateResult.user.first_name,
-        lang: validateResult.user.language_code,
+        lang: validateResult.user.language_code.split("-")[0],
       };
       await res.status(validateResult.status).send(userInfo);
     } else {
