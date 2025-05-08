@@ -1,0 +1,251 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+.vpn__info {
+  width: 350px;
+  padding: 10px;
+  background-image: url("../assets/logo.png");
+  background-size: 300px;
+  background-repeat: no-repeat;
+  background-position: 180px center;
+  border: 1px solid #a9a9a9;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.vpn__info .vpn__info__text, .vpn__info .bottom__wrapper .vpn__button .vpn__btn__text, .vpn__info .bottom__wrapper .vpn__large__button .vpn__btn__text, .vpn__info .center__wrapper .vpn__expire__date, .vpn__info .center__wrapper .vpn__expire, .vpn__info .top__wrapper .vpn__status .status {
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+}
+.vpn__info .top__wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+.vpn__info .top__wrapper .vpn__info__heading {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  color: #fff;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.vpn__info .top__wrapper .vpn__status {
+  display: flex;
+  gap: 5px;
+  flex-direction: row;
+  align-items: center;
+}
+.vpn__info .top__wrapper .vpn__status .indicate__status {
+  height: 7px;
+  width: 7px;
+  border-radius: 100%;
+}
+.vpn__info .center__wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+}
+.vpn__info .bottom__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.vpn__info .bottom__wrapper .two__btns {
+  display: flex;
+  gap: 10px;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.vpn__info .bottom__wrapper .vpn__button, .vpn__info .bottom__wrapper .vpn__large__button {
+  width: 140px;
+  height: 38px;
+  background: #5ac8fb;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.vpn__info .bottom__wrapper .vpn__large__button {
+  width: 290px;
+}
+
+.user__info {
+  padding: 10px 10px 0 10px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+.user__info .info__user__pfp {
+  width: 100px;
+  height: 100px;
+  background: #5ac8fb;
+  border-radius: 100%;
+}
+.user__info .info__heading {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: #fff;
+  height: -moz-fit-content;
+  height: fit-content;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.user__info .info__user__id {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+.user__info .info__user__id .user__id {
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  color: #fff;
+  font-weight: 600;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.user__info .info__user__id .user__show__id {
+  width: 21px;
+  height: -moz-fit-content;
+  height: fit-content;
+  cursor: pointer;
+}
+.user__info .info__balance__btn {
+  background: #5ac8fb;
+  width: 140px;
+  height: 38px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.user__info .info__balance__btn span {
+  font-family: "Montserrat", sans-serif;
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.traffic__info {
+  width: 350px;
+  border: 1px solid #a9a9a9;
+  padding: 10px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.traffic__info .top__wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.traffic__info .top__wrapper .traffic__text {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  color: #fff;
+  font-size: 16px;
+}
+.traffic__info .top__wrapper .left__wrapper {
+  width: 150px;
+  display: flex;
+  gap: 2px;
+}
+.traffic__info .top__wrapper .left__wrapper img {
+  width: 24px;
+  height: 24px;
+  transform: rotate(-90deg);
+}
+.traffic__info .top__wrapper .right__wrapper {
+  width: 150px;
+  display: flex;
+  gap: 2px;
+}
+.traffic__info .top__wrapper .right__wrapper img {
+  width: 24px;
+  height: 24px;
+  transform: rotate(90deg);
+}
+.traffic__info .bottom__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.traffic__info .bottom__wrapper .traffic__block, .traffic__info .bottom__wrapper .upload, .traffic__info .bottom__wrapper .download {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border-width: 1px;
+  border-style: solid;
+}
+.traffic__info .bottom__wrapper .traffic__block p, .traffic__info .bottom__wrapper .upload p, .traffic__info .bottom__wrapper .download p {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: #fff;
+}
+.traffic__info .bottom__wrapper .download {
+  background-color: #10351d;
+  border-color: #50c878;
+  width: 150px;
+  height: 44px;
+}
+.traffic__info .bottom__wrapper .upload {
+  background-color: #47181a;
+  border-color: #ce2029;
+  width: 150px;
+  height: 44px;
+}
+
+footer {
+  height: 90px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  border-top: 1px solid #3f3f3f;
+  background-color: #0b0c0e;
+}
+footer .footer__nav {
+  display: flex;
+  gap: 50px;
+}
+footer .footer__nav .footer__buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+footer .footer__nav .footer__buttons img {
+  width: 28px;
+  height: 28px;
+}
+footer .footer__nav .footer__buttons .nav__text {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  color: #acacac;
+}
+
+.main__info::-webkit-scrollbar {
+  display: none;
+}
+
+.main__info {
+  padding-bottom: 100px;
+}/*# sourceMappingURL=App.css.map */

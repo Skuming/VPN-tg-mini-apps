@@ -1,0 +1,84 @@
+@use "variables" as *;
+
+$TrafficWidth: 150px;
+$TrafficHeight: 44px;
+
+.traffic__info {
+  width: $BlockWidth;
+  border: $BlockBorder;
+  padding: $BlockPadding;
+  border-radius: $RoundBlock;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  .top__wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    .traffic__text {
+      font-family: $font;
+      font-weight: $SemiBold;
+      color: #fff;
+      font-size: 16px;
+    }
+    .left__wrapper {
+      width: $TrafficWidth;
+      display: flex;
+      gap: 2px;
+      img {
+        width: 24px;
+        height: 24px;
+        transform: rotate(-90deg);
+      }
+    }
+
+    .right__wrapper {
+      width: $TrafficWidth;
+      display: flex;
+      gap: 2px;
+      img {
+        width: 24px;
+        height: 24px;
+        transform: rotate(90deg);
+      }
+    }
+  }
+
+  .bottom__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .traffic__block {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: $RoundBlock;
+      border-width: 1px;
+      border-style: solid;
+      p {
+        font-family: $font;
+        font-weight: $SemiBold;
+        font-size: 16px;
+        color: #fff;
+      }
+    }
+
+    .download {
+      @extend .traffic__block;
+      background-color: #10351d;
+      border-color: #50c878;
+      width: $TrafficWidth;
+      height: $TrafficHeight;
+    }
+
+    .upload {
+      @extend .traffic__block;
+      background-color: #47181a;
+      border-color: #ce2029;
+      width: $TrafficWidth;
+      height: $TrafficHeight;
+    }
+  }
+}

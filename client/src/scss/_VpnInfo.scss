@@ -1,0 +1,94 @@
+@use "variables" as *;
+.vpn__info {
+  width: $BlockWidth;
+  padding: $BlockPadding;
+  background-image: url("../assets/logo.png");
+  background-size: 300px;
+  background-repeat: no-repeat;
+  background-position: 180px center;
+  border: $BlockBorder;
+  border-radius: $RoundBlock;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  .vpn__info__text {
+    font-family: $font;
+    font-size: 14px;
+    font-weight: $SemiBold;
+    color: #fff;
+  }
+
+  .top__wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+
+    .vpn__info__heading {
+      font-family: $font;
+      font-weight: $SemiBold;
+      font-size: 24px;
+      color: #fff;
+      height: fit-content;
+    }
+    .vpn__status {
+      display: flex;
+      gap: 5px;
+      flex-direction: row;
+      align-items: center;
+
+      .status {
+        @extend .vpn__info__text;
+      }
+
+      .indicate__status {
+        height: 7px;
+        width: 7px;
+        border-radius: 100%;
+      }
+    }
+  }
+
+  .center__wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+
+    .vpn__expire {
+      @extend .vpn__info__text;
+    }
+    .vpn__expire__date {
+      @extend .vpn__info__text;
+    }
+  }
+
+  .bottom__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    .two__btns {
+      display: flex;
+      gap: 10px;
+      width: fit-content;
+    }
+    .vpn__button {
+      width: $BtnWidth;
+      height: $BtnHeight;
+      background: $BtnColor;
+      border-radius: $RoundBlock;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .vpn__btn__text {
+        @extend .vpn__info__text;
+      }
+    }
+    .vpn__large__button {
+      @extend .vpn__button;
+      width: $BtnWidth * 2 + 10px;
+    }
+  }
+}

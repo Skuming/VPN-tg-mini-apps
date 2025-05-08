@@ -1,0 +1,69 @@
+@use "variables" as *;
+
+.user__info {
+  padding: 10px 10px 0 10px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+
+  .info__user__pfp {
+    width: 100px;
+    height: 100px;
+    background: $BtnColor;
+    border-radius: 100%;
+    // w-[100px] h-[100px] bg-amber-300 rounded-full
+  }
+
+  .info__heading {
+    font-family: $font;
+    font-weight: $SemiBold;
+    font-size: 20px;
+    color: #fff;
+    height: fit-content;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    // text-transform: uppercase;
+  }
+
+  .info__user__id {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+
+    .user__id {
+      font-family: $font;
+      font-size: 14px;
+      color: #fff;
+      font-weight: $SemiBold;
+      height: fit-content;
+    }
+
+    .user__show__id {
+      width: 21px;
+      height: fit-content;
+      cursor: pointer;
+    }
+  }
+  .info__balance__btn {
+    background: $BtnColor;
+    width: $BtnWidth;
+    height: $BtnHeight;
+    border-radius: $RoundBlock;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    span {
+      font-family: $font;
+      color: #fff;
+      font-weight: $SemiBold;
+      font-size: 14px;
+    }
+  }
+}

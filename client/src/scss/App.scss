@@ -1,0 +1,15 @@
+@use "VpnInfo";
+@use "UserInfo";
+@use "TraficInfo";
+@use "Footer";
+
+@use "Variables" as *;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+.main__info::-webkit-scrollbar {
+  display: none;
+}
+
+.main__info {
+  padding-bottom: $FooterHeight + 10;
+}
