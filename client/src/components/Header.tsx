@@ -1,6 +1,7 @@
 import { User } from "../interfaces/interfaces";
 import { useState } from "react";
 import plusImg from "../assets/plus.svg";
+import ModalAddFund from "./ModalAddFund";
 
 function Header({ first_name, balance, photo_url, lang }: User) {
   const [addFund, setAddFund] = useState(false);
@@ -11,21 +12,21 @@ function Header({ first_name, balance, photo_url, lang }: User) {
 
   return (
     <>
-      <header className="w-full h-[13%] tg__header border-1 flex justify-evenly rounded-b-3xl">
+      <header className="w-full h-[13%] tg__header flex justify-evenly rounded-b-3xl">
         <div className="left__side w-[45%] h-full flex items-center">
-          <div className="tg__btn h-[55%] rounded-full w-[80%] flex items-center justify-center gap-1.5 p-1">
+          <div className="tg__btn h-[55%] border-white rounded-full w-[80%] md:w-[40%] flex items-center justify-center gap-1.5 md:gap-5 p-1">
             <p className="tg__txt rounded-full text-center pl-1.5 pr-1.5">
               {balance} ₽
             </p>
             <button
-              className="flex items-center justify-center h-full"
+              className="tg__btn flex items-center justify-center h-full"
               onClick={handleClickFund}
             >
               <span>
                 <img
                   src={plusImg}
                   alt=""
-                  className="h-[22px] w-[22px] rounded-full"
+                  className="h-[22px] w-[22px] rounded-full cursor-pointer transition-transform duration-150 hover:scale-110"
                 />
               </span>
             </button>
@@ -37,25 +38,7 @@ function Header({ first_name, balance, photo_url, lang }: User) {
         </div>
       </header>
       {addFund === true ? (
-        <>
-          <div
-            className="h-screen w-screen bg-[#00000093] absolute"
-            onClick={handleClickFund}
-          ></div>
-          <div className="h-1/2 w-[90%] lg:w-[40%] lg:h-[70%] tg__section rounded-2xl absolute top-1/5">
-            <button
-              className="h-[48px] flex flex-row-reverse w-full p-2"
-              onClick={handleClickFund}
-            >
-              <span>
-                <img src={plusImg} alt="" className="h-[32px] rotate-45" />
-              </span>
-            </button>
-            <div className="add__fund__info tg__txt">
-              <h1></h1>
-            </div>
-          </div>
-        </>
+        <ModalAddFund handleClickFund={handleClickFund} lang={lang} />
       ) : (
         ""
       )}
