@@ -1,6 +1,6 @@
 # Vpn mini-apps for [my bot](https://t.me/CokiVPN_Bot)
 
-## The bot it`s not renamed yet (08.05.2025), but it`s gonna be __RENAMED__ as soon as project is done
+## The bot it's not renamed yet (08.05.2025), but it`s gonna be __RENAMED__ as soon as project is done
 
 ### Features
 - Buy VPN *OMG!*
