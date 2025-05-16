@@ -1,0 +1,80 @@
+@use "Variables" as *;
+
+.modal {
+  height: 100vh;
+  width: 100%;
+  background: #00000052;
+  display: flex;
+  justify-content: center;
+  padding: $BlockPadding;
+  position: absolute;
+  z-index: 50;
+
+  .modal__window {
+    position: relative;
+    width: 330px;
+    top: 100px;
+    height: fit-content;
+    background-color: #0b0c0e;
+    border: $BlockBorder;
+    border-radius: $RoundBlock;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: $BlockPadding + 10px;
+    gap: 10px;
+    z-index: 1000;
+
+    .close__btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+
+      span {
+        display: flex;
+        flex-direction: row-reverse;
+        img {
+          width: 28px;
+          height: 28px;
+          transform: rotate(-45deg);
+        }
+      }
+    }
+
+    .modal__heading {
+      font-family: $font;
+      font-weight: $SemiBold;
+      color: #fff;
+      font-size: 22px;
+    }
+
+    .modal__content {
+      font-family: $font;
+      font-weight: $SemiBold;
+      color: #fff;
+      font-size: 16px;
+      width: 100%;
+      overflow-wrap: break-word;
+      border: $BlockBorder;
+      padding: $BlockPadding;
+      border-radius: $RoundBlock;
+    }
+    .modal__btn {
+      padding: 5px;
+      height: $BtnHeight;
+      background: $BtnColor;
+      border-radius: $RoundBlock;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      span {
+        font-family: $font;
+        font-weight: $SemiBold;
+        font-size: 14px;
+        color: #fff;
+      }
+    }
+  }
+}
