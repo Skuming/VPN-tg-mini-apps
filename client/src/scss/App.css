@@ -12,7 +12,27 @@
   flex-direction: column;
   gap: 5px;
 }
-.vpn__info .vpn__info__text, .vpn__info .bottom__wrapper .vpn__button .vpn__btn__text, .vpn__info .bottom__wrapper .vpn__large__button .vpn__btn__text, .vpn__info .center__wrapper .vpn__expire__date, .vpn__info .center__wrapper .vpn__expire, .vpn__info .top__wrapper .vpn__status .status {
+.vpn__info .no__sub {
+  width: 100%;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+}
+.vpn__info .no__sub img {
+  width: 60px;
+}
+.vpn__info .no__sub .no__sub__text {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: #fff;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.vpn__info .vpn__info__text, .vpn__info .bottom__wrapper .vpn__btn__text, .vpn__info .center__wrapper .vpn__expire__date, .vpn__info .center__wrapper .vpn__expire, .vpn__info .top__wrapper .vpn__status .status, .vpn__info .no__sub button {
   font-family: "Montserrat", sans-serif;
   font-size: 14px;
   font-weight: 600;
@@ -49,6 +69,16 @@
   gap: 5px;
   align-items: center;
 }
+.vpn__info .vpn__button, .vpn__info .vpn__large__button, .vpn__info .no__sub button {
+  width: 140px;
+  height: 38px;
+  background: #5ac8fb;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
 .vpn__info .bottom__wrapper {
   display: flex;
   flex-direction: column;
@@ -60,16 +90,7 @@
   width: -moz-fit-content;
   width: fit-content;
 }
-.vpn__info .bottom__wrapper .vpn__button, .vpn__info .bottom__wrapper .vpn__large__button {
-  width: 140px;
-  height: 38px;
-  background: #5ac8fb;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.vpn__info .bottom__wrapper .vpn__large__button {
+.vpn__info .vpn__large__button {
   width: 290px;
 }
 
@@ -144,6 +165,12 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
+}
+.traffic__info .traffic__info_no_sub {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .traffic__info .top__wrapper {
   display: flex;
@@ -240,6 +267,154 @@ footer .footer__nav .footer__buttons .nav__text {
   font-weight: 600;
   font-size: 12px;
   color: #acacac;
+}
+
+.modal {
+  height: 100vh;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.3215686275);
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  position: absolute;
+  z-index: 50;
+}
+.modal .modal__window {
+  position: relative;
+  width: 330px;
+  top: 100px;
+  height: -moz-fit-content;
+  height: fit-content;
+  background-color: #0b0c0e;
+  border: 1px solid #a9a9a9;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  gap: 10px;
+  z-index: 1000;
+}
+.modal .modal__window .close__btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+.modal .modal__window .close__btn span {
+  display: flex;
+  flex-direction: row-reverse;
+}
+.modal .modal__window .close__btn span img {
+  width: 28px;
+  height: 28px;
+  transform: rotate(-45deg);
+}
+.modal .modal__window .modal__heading {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  color: #fff;
+  font-size: 22px;
+}
+.modal .modal__window .modal__content {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  color: #fff;
+  font-size: 16px;
+  width: 100%;
+  overflow-wrap: break-word;
+  border: 1px solid #a9a9a9;
+  padding: 10px;
+  border-radius: 8px;
+}
+.modal .modal__window .modal__btn {
+  padding: 5px;
+  height: 38px;
+  background: #5ac8fb;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.modal .modal__window .modal__btn span {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+}
+
+.content {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  color: #fff;
+}
+
+.modal__sub__content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.modal__sub__content button {
+  background-color: #5ac8fb;
+}
+.modal__sub__content .modal__sub__btns {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+.modal__sub__content .modal__sub__btns .sub__days {
+  width: 100px;
+  height: 28px;
+  border: 1px solid #a9a9a9;
+  border-radius: calc(infinity * 1px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal__sub__content .modal__sub__btns .sub__days .days {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: #fff;
+  text-align: center;
+  line-height: 0px;
+}
+.modal__sub__content .modal__sub__btns .control__days {
+  width: 28px;
+  height: 28px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.modal__sub__content .modal__sub__btns .control__days span {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  color: #fff;
+  text-align: center;
+  line-height: 0px;
+}
+.modal__sub__content .submit__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 38px;
+  width: 140px;
+  border-radius: calc(infinity * 1px);
+  cursor: pointer;
+}
+.modal__sub__content .submit__btn span {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+  line-height: 0px;
 }
 
 .main__info::-webkit-scrollbar {

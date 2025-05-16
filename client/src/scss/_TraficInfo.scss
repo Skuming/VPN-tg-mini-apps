@@ -11,6 +11,13 @@ $TrafficHeight: 44px;
   display: flex;
   flex-direction: column;
   gap: 5px;
+
+  .traffic__info_no_sub {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .top__wrapper {
     display: flex;
     flex-direction: row;
