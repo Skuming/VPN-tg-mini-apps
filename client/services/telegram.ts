@@ -10,9 +10,9 @@ async function ValidateData(data: string) {
       headers: {
         "bypass-tunnel-reminder": true, // remove in production
       },
+      withCredentials: true,
     }
   );
-
   return await response.data;
 }
 export default ValidateData;
