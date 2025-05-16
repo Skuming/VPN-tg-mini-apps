@@ -8,4 +8,5 @@ export interface User {
   photo_url: string;
   first_name: string;
   lang: string;
+  username: string;
 }
