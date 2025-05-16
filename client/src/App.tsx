@@ -1,19 +1,27 @@
 import "./scss/App.css";
 import Home from "./pages/Home";
-// import InitUser from "../services/telegram";
+import { useContext } from "react";
+import { InfoContext } from "../services/context";
+// import ValidateData from "../services/telegram";
+
+// import { useEffect, useState } from "react";
 // import axios from "axios"; <--- connect when backend is ready
 
-/* @ts-expect-error || React can`t init this*/
-const tg = window.Telegram.WebApp;
-const data = tg.initData;
-console.log(tg);
-tg.expand();
-tg.enableClosingConfirmation();
-tg.setHeaderColor("#0B0C0E");
-tg.setBackgroundColor("#0B0C0E");
-
 function App() {
-  return <Home />;
+  const { info } = useContext(InfoContext);
+
+  if (!info) {
+    return (
+      <div className="h-screen flex items-center justify-center">
+        <div className="rounded-full bg-white w-[100px] h-[100px] animate-bounce"></div>
+      </div>
+    );
+  }
+  return (
+    <>
+      <Home></Home>
+    </>
+  );
 }
 
 export default App;
