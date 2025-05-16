@@ -1,0 +1,79 @@
+@use "Variables" as *;
+
+.content {
+  font-family: $font;
+  font-weight: $SemiBold;
+  color: #fff;
+}
+
+.modal__sub__content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  button {
+    background-color: $BtnColor;
+  }
+
+  .modal__sub__btns {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+
+    .sub__days {
+      width: 100px;
+      height: $BtnHeight - 10px;
+      border: $BlockBorder;
+      border-radius: calc(infinity * 1px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .days {
+        font-family: $font;
+        font-weight: $SemiBold;
+        font-size: 16px;
+        color: #fff;
+        text-align: center;
+        line-height: 0px;
+      }
+    }
+    .control__days {
+      width: $BtnHeight - 10px;
+      height: $BtnHeight - 10px;
+      border-radius: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      span {
+        font-family: $font;
+        font-weight: $SemiBold;
+        font-size: 24px;
+        color: #fff;
+        text-align: center;
+        line-height: 0px;
+      }
+    }
+  }
+  .submit__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: $BtnHeight;
+    width: $BtnWidth;
+    border-radius: calc(infinity * 1px);
+    cursor: pointer;
+
+    span {
+      font-family: $font;
+      font-weight: $SemiBold;
+      font-size: 14px;
+      color: #fff;
+      text-align: center;
+      line-height: 0px;
+    }
+  }
+}
