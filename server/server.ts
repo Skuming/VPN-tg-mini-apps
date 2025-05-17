@@ -1,7 +1,7 @@
 import express, { Request, response, Response } from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import { GetUserInfo } from "./DB/DB";
+import { GetUserInfo, ChangeBalance } from "./DB/DB";
 import ValidateInitData from "./handlers/validate";
 import CreateToken from "./handlers/createtoken";
 import ValidateToken from "./handlers/validatetoken";
@@ -13,7 +13,7 @@ const app = express();
 
 app.use(
   express.json(),
-  cors({ origin: true, credentials: true }), // On production change to real domain
+  cors({ origin: "https://my-mini-apps-vpn.loca.lt", credentials: true }), // On production change to real domain
   cookieParser()
 );
 
@@ -23,7 +23,7 @@ app.post("/api/validate", async (req: Request, res: Response) => {
     if (validateResult.status === 200) {
       const userDBInfo = await GetUserInfo(validateResult.user.id);
       const trafic = await GetTraficData(userDBInfo.user_id);
-      // const expiryTime = await GetExpiryDate(userDBInfo.user_id);
+
       const userInfo3X = {
         ...userDBInfo,
         photo_url: validateResult.user.photo_url,
@@ -81,7 +81,10 @@ app.post("/api/renewsub", async (req: Request, res: Response) => {
     if (prices.has(days)) {
       const userDBInfo = await GetUserInfo(user.user_id);
 
-      if (Number(userDBInfo.balance) >= prices.get(days)!) {
+      if (
+        Number(userDBInfo.balance) >= prices.get(days)! &&
+        userDBInfo.have_sub === 1
+      ) {
         const expirydate = await GetExpiryDate(userDBInfo.user_id);
         const newExpiryDate = expirydate + days * 24 * 60 * 60 * 1000;
         await UpdateSub(
@@ -90,12 +93,23 @@ app.post("/api/renewsub", async (req: Request, res: Response) => {
           expirydate,
           newExpiryDate
         );
+        await ChangeBalance(userDBInfo.user_id, prices.get(days)!);
+        res.status(200).send({ status: "Succses!" });
       } else {
-        res.status(404).send({ status: "Error" });
+        res.status(400).send({ status: "Error" });
       }
     } else {
-      res.status(404).send({ status: "Invalid days!" });
+      res.status(400).send({ status: "Invalid days!" });
     }
+  } else {
+    res.status(401).send({ status: "Your token are invalid!" });
+  }
+});
+
+app.post("/api/buy", async (req, res) => {
+  const user: any = await ValidateToken(req.cookies.token);
+
+  if (user !== "error") {
   } else {
     res.status(401).send({ status: "Your token are invalid!" });
   }
