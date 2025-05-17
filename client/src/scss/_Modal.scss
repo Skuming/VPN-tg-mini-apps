@@ -13,7 +13,7 @@
   .modal__window {
     position: relative;
     width: 330px;
-    top: 100px;
+    top: 50px;
     height: fit-content;
     background-color: #0b0c0e;
     border: $BlockBorder;
@@ -59,6 +59,11 @@
       border: $BlockBorder;
       padding: $BlockPadding;
       border-radius: $RoundBlock;
+    }
+    .modal__bottom__btns {
+      display: flex;
+      justify-content: space-evenly;
+      width: 100%;
     }
     .modal__btn {
       padding: 5px;

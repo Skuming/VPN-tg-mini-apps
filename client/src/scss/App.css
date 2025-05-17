@@ -282,7 +282,7 @@ footer .footer__nav .footer__buttons .nav__text {
 .modal .modal__window {
   position: relative;
   width: 330px;
-  top: 100px;
+  top: 50px;
   height: -moz-fit-content;
   height: fit-content;
   background-color: #0b0c0e;
@@ -326,6 +326,11 @@ footer .footer__nav .footer__buttons .nav__text {
   border: 1px solid #a9a9a9;
   padding: 10px;
   border-radius: 8px;
+}
+.modal .modal__window .modal__bottom__btns {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
 }
 .modal .modal__window .modal__btn {
   padding: 5px;
