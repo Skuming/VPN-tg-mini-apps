@@ -32,16 +32,26 @@ function ModalConfiguartion({
             </button>
             <h1 className="modal__heading">{heading}</h1>
             <p className="modal__content">{content}</p>
-            <button
-              className="modal__btn"
-              onClick={() =>
-                navigator.clipboard.writeText(
-                  typeof content === "string" ? content : "Error"
-                )
-              }
-            >
-              <span>Скопировать в буфер обмена</span>
-            </button>
+            <div className="modal__bottom__btns">
+              <button
+                className="modal__btn"
+                onClick={() =>
+                  navigator.clipboard.writeText(
+                    typeof content === "string" ? content : "Error"
+                  )
+                }
+              >
+                <span>Скопировать</span>
+              </button>
+              <a
+                href="https://teletype.in/@cookiie/W4OZLZezOJo"
+                target="_blank"
+              >
+                <button className="modal__btn">
+                  <span>Подключить</span>
+                </button>
+              </a>
+            </div>
           </motion.div>
         </motion.div>
       )}
