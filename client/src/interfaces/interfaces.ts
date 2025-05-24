@@ -1,6 +1,6 @@
 export interface User {
   id: number;
-  user_id: number;
+  user_id: bigint;
   balance: string;
   have_sub: number;
   vpn: null | string;
@@ -17,6 +17,12 @@ export interface User {
 export interface InfoContextProps {
   info: User | undefined;
   setInfo: React.Dispatch<React.SetStateAction<User | undefined>>;
+}
+
+export interface TG {
+  tg?: {
+    enableClosingConfirmation: () => void;
+  };
 }
 
 export interface GlobalModal {
