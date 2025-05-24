@@ -1,16 +1,28 @@
 import { useContext, useState } from "react";
 import { InfoContext } from "../../services/context";
-import ModalConfiguartion from "./ModalConfiguartion";
 import eyeImg from "../assets/Eye.svg";
 import eyeHideImg from "../assets/EyeHide.svg";
 import arrowImg from "../assets/arrow.svg";
 import errorImg from "../assets/Error.svg";
+import plusImg from "../assets/plus.svg";
+
+import ModalConfiguartion from "./ModalConfiguartion";
 import ModalContinueSub from "./ModalContinueSub";
+import ModalBuyVpn from "./ModalBuyVpn";
+import ModalAddFund from "./ModalAddFund";
 
 function HomeScreen() {
   const [hide, setHide] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showModalSub, setShowModalSub] = useState(false);
+  const [showModalBuy, setShowModalBuy] = useState(false);
+  const [showModalAddFund, setShowModalAddFund] = useState(false);
+
+  console.log(showModalAddFund);
+
+  const handleModalAddFund = () => {
+    setShowModalAddFund((prev) => !prev);
+  };
 
   const handleModalConf = () => {
     setShowModal((prev) => !prev);
@@ -18,6 +30,10 @@ function HomeScreen() {
 
   const handleModalSub = () => {
     setShowModalSub((prev) => !prev);
+  };
+
+  const handelModalBuy = () => {
+    setShowModalBuy((prev) => !prev);
   };
 
   const handleHideId = () => {
@@ -46,12 +62,16 @@ function HomeScreen() {
             </span>
           </button>
         </div>
-        <button className="info__balance__btn">
-          <span>Баланс {info?.balance} ₽</span>
+
+        <button className="info__balance__btn" onClick={handleModalAddFund}>
+          <span className="info__balance">{info?.balance} ₽</span>
+          <span className="info__add__balance">
+            <img src={plusImg} alt="" />
+          </span>
         </button>
       </div>
       <div className="vpn__info">
-        {info?.have_sub !== 0 || null ? (
+        {info?.have_sub !== 0 && info?.vpn !== null ? (
           <>
             <div className="top__wrapper">
               <h1 className="vpn__info__heading">NetGuard</h1>
@@ -82,11 +102,11 @@ function HomeScreen() {
           <div className="no__sub">
             <img src={errorImg} alt="" />
             <h1 className="no__sub__text">У вас нету подписки</h1>
-            <button>Купить</button>
+            <button onClick={handelModalBuy}>Купить</button>
           </div>
         )}
       </div>
-      {info?.have_sub !== 0 ? (
+      {info?.have_sub !== 0 && info?.vpn !== null ? (
         <>
           {" "}
           <div className="traffic__info">
@@ -103,17 +123,27 @@ function HomeScreen() {
             <div className="bottom__wrapper">
               <div className="download">
                 <p>
-                  {info?.down ? Math.round(info?.down / (1024 * 1024)) : null}{" "}
+                  {info?.down === 0
+                    ? 0
+                    : info?.down
+                    ? Math.round(info?.down / (1024 * 1024))
+                    : null}{" "}
                   МБ
                 </p>
               </div>
               <div className="upload">
                 <p>
-                  {info?.up ? Math.round(info?.up / (1024 * 1024)) : null} МБ
+                  {info?.up === 0
+                    ? 0
+                    : info?.up
+                    ? Math.round(info?.up / (1024 * 1024))
+                    : null}{" "}
+                  МБ
                 </p>
               </div>
             </div>
           </div>
+          {/* Zone for more */}
         </>
       ) : (
         ""
@@ -127,9 +157,23 @@ function HomeScreen() {
 
       <ModalContinueSub
         heading="Продлить подписку"
-        content={"Выберите продолжительность"}
+        content="Выберите продолжительность"
         setShowModal={handleModalSub}
         showModal={showModalSub}
+      />
+
+      <ModalBuyVpn
+        heading={info?.lang === "ru" ? "Покупка" : "Buy"}
+        content={"*Преобретая данную услуг вы "}
+        setShowModal={handelModalBuy}
+        showModal={showModalBuy}
+      />
+
+      <ModalAddFund
+        heading={info?.lang === "ru" ? "Пополнить" : "Top-up"}
+        content={info?.lang === "ru" ? "Введите сумму: " : "Enter amount: "}
+        setShowModal={handleModalAddFund}
+        showModal={showModalAddFund}
       />
     </section>
   );
