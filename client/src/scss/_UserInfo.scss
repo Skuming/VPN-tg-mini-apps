@@ -58,12 +58,28 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
-    span {
+    cursor: pointer;
+    .info__balance {
       font-family: $font;
       color: #fff;
       font-weight: $SemiBold;
       font-size: 14px;
+      width: 70%;
+    }
+
+    .info__add__balance {
+      height: 100%;
+      width: 30%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      border-radius: 0px $RoundBlock $RoundBlock 0px;
+      box-shadow: 2px 0px 0px 0px #fff inset;
+      img {
+        width: 22px;
+        height: 22px;
+      }
     }
   }
 }
