@@ -1,10 +1,11 @@
 import axios from "axios";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 // In prod merge telegram.ts and api.ts!!!!
 
-async function Buy(data: number) {
+export async function Renew(data: number) {
   const result = await axios.post(
-    "https://my-mini-apps-vpn-back.loca.lt/api/renewsub",
+    `${apiUrl}/api/renewsub`,
     {
       renewDays: data,
     },
@@ -15,7 +16,21 @@ async function Buy(data: number) {
       },
     }
   );
-
   return await result;
 }
-export default Buy;
+
+export async function Buy(duration: string) {
+  const result = await axios.post(
+    `${apiUrl}/api/buy`,
+    {
+      purchaseData: duration,
+    },
+    {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return await result;
+}

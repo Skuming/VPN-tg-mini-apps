@@ -1,8 +1,9 @@
 import axios from "axios";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 async function ValidateData(data: string) {
   const response = await axios.post(
-    "https://my-mini-apps-vpn-back.loca.lt/api/validate",
+    `${apiUrl}/api/validate`,
     {
       rawdata: data,
     },
