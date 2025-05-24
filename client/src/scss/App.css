@@ -149,12 +149,28 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
-.user__info .info__balance__btn span {
+.user__info .info__balance__btn .info__balance {
   font-family: "Montserrat", sans-serif;
   color: #fff;
   font-weight: 600;
   font-size: 14px;
+  width: 70%;
+}
+.user__info .info__balance__btn .info__add__balance {
+  height: 100%;
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  border-radius: 0px 8px 8px 0px;
+  box-shadow: 2px 0px 0px 0px #fff inset;
+}
+.user__info .info__balance__btn .info__add__balance img {
+  width: 22px;
+  height: 22px;
 }
 
 .traffic__info {
@@ -269,6 +285,11 @@ footer .footer__nav .footer__buttons .nav__text {
   color: #acacac;
 }
 
+@media (max-height: 500px) {
+  footer {
+    display: none;
+  }
+}
 .modal {
   height: 100vh;
   width: 100%;
@@ -420,6 +441,130 @@ footer .footer__nav .footer__buttons .nav__text {
   color: #fff;
   text-align: center;
   line-height: 0px;
+}
+
+.modal__buy__btns {
+  width: 100%;
+  gap: 5px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(4);
+}
+.modal__buy__btns .modal__btn__btn {
+  padding: 10px;
+  height: 76px;
+  border: #5ac8fb 2px solid;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.modal__buy__btns .modal__btn__btn span {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 22px;
+  color: #fff;
+}
+
+.no__funds {
+  position: fixed;
+  top: 5px;
+  width: 90%;
+  height: 50px;
+  background-color: rgba(193, 6, 6, 0.6705882353);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  border: 1px solid #a9a9a9;
+  border-radius: 8px;
+}
+.no__funds span {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  color: #fff;
+}
+
+.input__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+}
+.input__container .input__wrapper {
+  position: relative;
+  display: flex;
+  height: 38px;
+  width: 240px;
+}
+.input__container .input__wrapper .input__fund__amount {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  color: #fff;
+  border: 1px solid #a9a9a9;
+  border-radius: 8px;
+  width: 100%;
+  padding: 0 60px 0 10px;
+}
+.input__container .input__wrapper .input__currency {
+  position: absolute;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  right: 10px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  color: #fff;
+  top: 50%;
+  transform: translateY(-50%);
+  line-height: 1;
+}
+.input__container .currency__wrapper {
+  position: relative;
+  gap: 10px;
+}
+.input__container .currency__wrapper .currency {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #5ac8fb;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.input__container .currency__wrapper .currency span {
+  color: #fff;
+}
+.input__container .currency__wrapper .currency__modal {
+  top: 43px;
+  position: absolute;
+  width: 50px;
+  border: 1px solid #a9a9a9;
+  border-radius: 8px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.input__container .currency__wrapper .currency__modal button {
+  width: 100%;
+  height: 26px;
+  cursor: pointer;
+}
+.input__container .currency__wrapper .currency__modal button span {
+  color: #fff;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+}
+.input__container .currency__wrapper .currency__modal hr {
+  width: 80%;
+  border-color: #a9a9a9;
+  margin: -10px 0;
 }
 
 .main__info::-webkit-scrollbar {

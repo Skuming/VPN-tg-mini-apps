@@ -4,7 +4,9 @@
 @use "Footer";
 @use "Modal";
 @use "ModalSub";
+@use "ModalBuy";
 @use "Variables" as *;
+@use "ModalAddFund";
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
 .main__info::-webkit-scrollbar {
