@@ -1,13 +1,15 @@
 import express, { Request, response, Response } from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import { GetUserInfo, ChangeBalance } from "./DB/DB";
+import { GetUserInfo, ChangeBalance, AddConfig } from "./DB/DB";
 import ValidateInitData from "./handlers/validate";
 import CreateToken from "./handlers/createtoken";
 import ValidateToken from "./handlers/validatetoken";
 import GetExpiryDate from "./handlers/3xui/getexpirydate";
 import GetTraficData from "./handlers/3xui/gettraficdata";
 import UpdateSub from "./handlers/3xui/updatesub";
+import CreateConfig from "./handlers/3xui/createuserconfiguration";
+import DeleteClient from "./handlers/3xui/deleteuserconfiguration";
 
 const app = express();
 
@@ -59,9 +61,6 @@ app.post("/api/validate", async (req: Request, res: Response) => {
 });
 
 app.post("/api/renewsub", async (req: Request, res: Response) => {
-  // console.log(req.cookies.token);
-  // console.log(req.body);
-
   const days: number = req.body.renewDays;
 
   const prices: Map<number, number> = new Map([
@@ -107,9 +106,54 @@ app.post("/api/renewsub", async (req: Request, res: Response) => {
 });
 
 app.post("/api/buy", async (req, res) => {
+  const userData = req.body.purchaseData;
   const user: any = await ValidateToken(req.cookies.token);
 
+  const prices = new Map<string, { price: number; date: number }>([
+    ["1m", { price: 50, date: 30 }],
+    ["3m", { price: 150, date: 90 }],
+    ["6m", { price: 300, date: 120 }],
+    ["1y", { price: 600, date: 360 }],
+  ]);
+
   if (user !== "error") {
+    const userDBInfo = await GetUserInfo(user.user_id);
+    if (
+      prices.has(userData) &&
+      userDBInfo.balance >= prices.get(userData)?.price! &&
+      userDBInfo.have_sub === 0
+    ) {
+      const expiryDate =
+        Date.now() + prices.get(userData)?.date! * 24 * 60 * 60 * 1000;
+
+      const deleteClient = await DeleteClient(userDBInfo.user_id);
+      console.log(deleteClient);
+
+      const createSub = await CreateConfig(
+        userDBInfo.user_id,
+        user.username,
+        expiryDate
+      );
+
+      console.log(await createSub);
+
+      if ((await createSub) === true) {
+        const vpn = `vless://${
+          userDBInfo.user_id
+        }@185.184.121.34:443?type=tcp&security=reality&pbk=SDWm7vRdRuCKMoTIpNs9DvZWB2Ct-kLPnI2Z58Np7RQ&fp=chrome&sni=yahoo.com&sid=2cd590&spx=%2F#reality-${
+          user.username + expiryDate
+        }`;
+        await ChangeBalance(userDBInfo.user_id, prices.get(userData)?.price!);
+        await AddConfig(userDBInfo.user_id, vpn, expiryDate);
+        res.status(200).send({ status: "Succses" });
+      } else {
+        res.status(400).send({ status: "Eternal error!" });
+      }
+    } else if (userDBInfo.have_sub !== 0) {
+      res.status(403).send({ status: "You already have a subscribtion!" });
+    } else {
+      res.status(403).send({ status: "Insufficient funds" });
+    }
   } else {
     res.status(401).send({ status: "Your token are invalid!" });
   }
