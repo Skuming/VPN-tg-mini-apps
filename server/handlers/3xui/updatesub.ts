@@ -1,10 +1,11 @@
 import axios from "axios";
 import dotenv from "dotenv";
+import { GetUserInfo } from "../../DB/DB";
 
 dotenv.config({ path: "../../.env" });
 
 async function UpdateSub(
-  userID: number,
+  userID: bigint,
   username: string,
   expirydate: number,
   newExpiryDate: number
@@ -27,8 +28,9 @@ async function UpdateSub(
       throw new Error("Куки не найдены");
     }
 
+    const userInfo = await GetUserInfo(userID);
     const updateClientResponse = await axios.post(
-      `http://${process.env.SERVER_3X}/panel/api/inbounds/updateClient/918919174`,
+      `http://${process.env.SERVER_3X}/panel/api/inbounds/updateClient/${userID}`,
       {
         id: 1,
         settings: JSON.stringify({
@@ -36,7 +38,7 @@ async function UpdateSub(
             {
               id: `${userID}`,
               flow: "",
-              email: username + expirydate,
+              email: username + userInfo.expiry_date,
               limitIp: 0,
               totalGB: "",
               expiryTime: newExpiryDate,
