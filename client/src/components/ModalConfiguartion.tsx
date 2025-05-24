@@ -1,6 +1,8 @@
 import { GlobalModal } from "../interfaces/interfaces";
 import { motion, AnimatePresence } from "framer-motion";
 import plusImg from "../assets/plus.svg";
+import { useContext } from "react";
+import { InfoContext } from "../../services/context";
 
 function ModalConfiguartion({
   heading,
@@ -8,6 +10,7 @@ function ModalConfiguartion({
   showModal,
   setShowModal,
 }: GlobalModal) {
+  const { info } = useContext(InfoContext);
   return (
     <AnimatePresence>
       {showModal && (
@@ -41,14 +44,14 @@ function ModalConfiguartion({
                   )
                 }
               >
-                <span>Скопировать</span>
+                <span>{info?.lang === "ru" ? "Скопировать" : "Copy"}</span>
               </button>
               <a
                 href="https://teletype.in/@cookiie/W4OZLZezOJo"
                 target="_blank"
               >
                 <button className="modal__btn">
-                  <span>Подключить</span>
+                  <span>{info?.lang === "ru" ? "Подключить" : "Connect"}</span>
                 </button>
               </a>
             </div>

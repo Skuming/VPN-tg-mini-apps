@@ -1,4 +1,4 @@
-import Buy from "../../services/api";
+import { Renew } from "../../services/api";
 
 import { GlobalModal } from "../interfaces/interfaces";
 import { motion, AnimatePresence } from "framer-motion";
@@ -40,7 +40,7 @@ function ModalContinueSub({
       setIsError(false);
 
       try {
-        const buy = await Buy(addDays);
+        const buy = await Renew(addDays);
         console.log(buy);
 
         if (buy.status === 200) {
