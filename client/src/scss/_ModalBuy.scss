@@ -1,0 +1,44 @@
+@use "Variables" as *;
+
+.modal__buy__btns {
+  width: 100%;
+  gap: 5px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(4);
+  .modal__btn__btn {
+    padding: 10px;
+    height: $BtnHeight * 2;
+    border: $BtnColor 2px solid;
+    border-radius: $RoundBlock;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    span {
+      font-family: $font;
+      font-weight: $SemiBold;
+      font-size: 22px;
+      color: #fff;
+    }
+  }
+}
+
+.no__funds {
+  position: fixed;
+  top: 5px;
+  width: 90%;
+  height: 50px;
+  background-color: #c10606ab;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  border: $BlockBorder;
+  border-radius: $RoundBlock;
+  span {
+    font-family: $font;
+    font-weight: $SemiBold;
+    color: #fff;
+  }
+}
