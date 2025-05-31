@@ -58,6 +58,24 @@ export async function ChangeBalance(userID: bigint, price: number) {
   }
 }
 
+export async function AddFund(userID: bigint, price: number) {
+  const conn = await pool.getConnection();
+  try {
+    const [result]: any = await conn.query(
+      "UPDATE `users` SET `balance` = balance + ? WHERE `user_id` = ?;",
+      [price, userID]
+    );
+    console.log(result);
+
+    return result[0];
+  } catch (error) {
+    conn.release();
+    return null;
+  } finally {
+    conn.release();
+  }
+}
+
 export async function AddConfig(
   userID: bigint,
   vpn: string,
