@@ -1,13 +1,13 @@
-import { StrictMode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { InfoContext } from "../services/context.ts";
 import ValidateData from "../services/telegram.ts";
 import { User } from "./interfaces/interfaces.ts";
 import "./index.css";
 import App from "./App.tsx";
+import WebApp from "@twa-dev/sdk";
 
-/* @ts-expect-error || React can`t init this*/
-const tg = window.Telegram.WebApp;
+const tg = WebApp;
 const data = tg.initData;
 
 tg.expand();
@@ -21,17 +21,21 @@ export function Main() {
   useEffect(() => {
     const validate = async () => {
       setInfo(await ValidateData(data));
-      console.log(await ValidateData(data));
     };
+
     validate();
+    const intervalId = setInterval(
+      validate,
+      info?.have_sub === 0 ? 10000 : 15000
+    );
+
+    return () => clearInterval(intervalId);
   }, []);
 
   return (
-    <StrictMode>
-      <InfoContext.Provider value={{ info, setInfo }}>
-        <App />
-      </InfoContext.Provider>
-    </StrictMode>
+    <InfoContext.Provider value={{ info, setInfo }}>
+      <App />
+    </InfoContext.Provider>
   );
 }
 
