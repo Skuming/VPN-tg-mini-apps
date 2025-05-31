@@ -10,6 +10,15 @@ import GetTraficData from "./handlers/3xui/gettraficdata";
 import UpdateSub from "./handlers/3xui/updatesub";
 import CreateConfig from "./handlers/3xui/createuserconfiguration";
 import DeleteClient from "./handlers/3xui/deleteuserconfiguration";
+import {
+  CreateStarInvoice,
+  CreateRubInvoice,
+} from "./handlers/invoice/invoices";
+
+import isonline from "./handlers/3xui/isonline";
+import StartBot from "./bot/bot";
+
+StartBot();
 
 const app = express();
 
@@ -25,6 +34,10 @@ app.post("/api/validate", async (req: Request, res: Response) => {
     if (validateResult.status === 200) {
       const userDBInfo = await GetUserInfo(validateResult.user.id);
       const trafic = await GetTraficData(userDBInfo.user_id);
+      const isOnline =
+        userDBInfo.have_sub === 1
+          ? await isonline(validateResult.user.username)
+          : "";
 
       const userInfo3X = {
         ...userDBInfo,
@@ -33,6 +46,7 @@ app.post("/api/validate", async (req: Request, res: Response) => {
         lang: validateResult.user.language_code.split("-")[0],
         username: validateResult.user.username,
         ...trafic,
+        isOnline: isOnline,
       };
       const userInfo = {
         ...userDBInfo,
@@ -153,6 +167,30 @@ app.post("/api/buy", async (req, res) => {
       res.status(403).send({ status: "You already have a subscribtion!" });
     } else {
       res.status(403).send({ status: "Insufficient funds" });
+    }
+  } else {
+    res.status(401).send({ status: "Your token are invalid!" });
+  }
+});
+
+app.post("/api/invoice", async (req: Request, res: Response) => {
+  const user: any = await ValidateToken(req.cookies.token);
+
+  if (user !== "error") {
+    if (req.body.currency === "star") {
+      // // star
+      const link = await CreateStarInvoice(req.body.amount, user.user_id);
+      res.status(200).send({ status: "ok", link: link });
+    }
+    if (req.body.currency === "rub") {
+      // rub
+
+      if (req.body.amount > 59) {
+        const link = await CreateRubInvoice(req.body.amount, user.user_id);
+        res.status(200).send({ status: "ok", link: link });
+      } else {
+        res.status(401).send({ status: "Amount is less than 60 RUB!" });
+      }
     }
   } else {
     res.status(401).send({ status: "Your token are invalid!" });
