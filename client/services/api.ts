@@ -34,3 +34,20 @@ export async function Buy(duration: string) {
   );
   return await result;
 }
+
+export async function GetInvoice(amount: number, currency: string) {
+  const result = await axios.post(
+    `${apiUrl}/api/invoice`,
+    {
+      currency: currency,
+      amount: amount,
+    },
+    {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return await result;
+}
