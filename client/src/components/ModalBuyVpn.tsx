@@ -1,9 +1,10 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { GlobalModal } from "../interfaces/interfaces";
 import plusImg from "../assets/plus.svg";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Buy } from "../../services/api";
 import { AxiosError } from "axios";
+import { InfoContext } from "../../services/context";
 
 function ModalBuyVpn({
   heading,
@@ -12,15 +13,27 @@ function ModalBuyVpn({
   setShowModal,
 }: GlobalModal) {
   const [showNoFunds, setShowNoFunds] = useState<boolean>(false);
+  const [showSuccses, setShowSuccses] = useState<boolean>(false);
+
+  const { info } = useContext(InfoContext);
 
   const handlePlanSelect = async (planId: string) => {
     try {
-      await Buy(planId);
+      const buy = await Buy(planId);
+      if (buy.status === 200) {
+        setShowSuccses(true);
+        setTimeout(async () => {
+          await setShowSuccses(false);
+          await setShowModal();
+        }, 5000);
+      }
     } catch (error) {
       if (error instanceof AxiosError && error.response) {
         if (error.response.status === 403) {
           setShowNoFunds(true);
-          setTimeout(() => setShowNoFunds(false), 5000);
+          setTimeout(() => {
+            setShowNoFunds(false);
+          }, 5000);
         }
       }
     }
@@ -87,12 +100,32 @@ function ModalBuyVpn({
       <AnimatePresence>
         {showNoFunds && (
           <motion.div
-            className="no__funds "
+            className="popup__buy no__funds"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <span className="">Недостаточно средств!</span>
+            <span>
+              {info?.lang === "ru"
+                ? "Недостаточно средств!"
+                : "Insufficient funds!"}
+            </span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {showSuccses && (
+          <motion.div
+            className="popup__buy succses"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <span>
+              {info?.lang === "ru"
+                ? "Успешно! Подождите"
+                : "Succses! Please wait!"}
+            </span>
           </motion.div>
         )}
       </AnimatePresence>

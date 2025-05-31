@@ -11,6 +11,8 @@ import ModalContinueSub from "./ModalContinueSub";
 import ModalBuyVpn from "./ModalBuyVpn";
 import ModalAddFund from "./ModalAddFund";
 
+import WebApp from "@twa-dev/sdk";
+
 function HomeScreen() {
   const [hide, setHide] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -18,29 +20,36 @@ function HomeScreen() {
   const [showModalBuy, setShowModalBuy] = useState(false);
   const [showModalAddFund, setShowModalAddFund] = useState(false);
 
-  console.log(showModalAddFund);
+  const tg = WebApp;
 
   const handleModalAddFund = () => {
     setShowModalAddFund((prev) => !prev);
+    tg.HapticFeedback.impactOccurred("soft");
   };
 
   const handleModalConf = () => {
     setShowModal((prev) => !prev);
+    tg.HapticFeedback.impactOccurred("soft");
   };
 
   const handleModalSub = () => {
     setShowModalSub((prev) => !prev);
+    tg.HapticFeedback.impactOccurred("soft");
   };
 
   const handelModalBuy = () => {
     setShowModalBuy((prev) => !prev);
+    tg.HapticFeedback.impactOccurred("soft");
   };
 
   const handleHideId = () => {
     setHide((prev) => !prev);
+    tg.HapticFeedback.notificationOccurred("warning");
   };
 
   const { info } = useContext(InfoContext);
+
+  const isOnline = info?.isOnline;
 
   // Expiry date
   const expiryDate = info?.expiryTime ? new Date(info.expiryTime) : null;
@@ -76,33 +85,63 @@ function HomeScreen() {
             <div className="top__wrapper">
               <h1 className="vpn__info__heading">NetGuard</h1>
               <div className="vpn__status">
-                <div className="indicate__status bg-[#50C878]"></div>
-                <p className="status">Вы онлайн</p>
+                <div
+                  className={`indicate__status ${
+                    isOnline === true ? "bg-[#50C878]" : "bg-[#c85050]"
+                  } animate-pulse`}
+                ></div>
+                <p className="status">
+                  {info?.lang === "ru"
+                    ? isOnline === true
+                      ? "Вы онлайн"
+                      : "Не онлайн"
+                    : isOnline === true
+                    ? "You online"
+                    : "Not online"}
+                </p>
               </div>
             </div>
             <div className="center__wrapper">
-              <p className="vpn__expire">Ваша подписка истекает:</p>
+              <p className="vpn__expire">
+                {info?.lang === "ru"
+                  ? "Ваша подписка истекает: "
+                  : "Subscription expires: "}
+              </p>
               <p className="vpn__expire__date">{formattedDate}</p>
             </div>
             <div className="bottom__wrapper">
               <div className="two__btns">
                 <button className="vpn__button" onClick={handleModalConf}>
-                  <span className="vpn__btn__text">Конфигурация</span>
+                  <span className="vpn__btn__text">
+                    {info?.lang === "ru" ? "Конфигурация" : "Configuration"}
+                  </span>
                 </button>
                 <button className="vpn__button">
-                  <span className="vpn__btn__text">Перейти в бота</span>
+                  <span className="vpn__btn__text">
+                    {info?.lang === "ru" ? "Перейти в бота" : "Go to bot"}
+                  </span>
                 </button>
               </div>
               <button className="vpn__large__button" onClick={handleModalSub}>
-                <span className="vpn__btn__text">Продлить подписку</span>
+                <span className="vpn__btn__text">
+                  {info?.lang === "ru"
+                    ? "Продлить подписку"
+                    : "Renew subscription"}
+                </span>
               </button>
             </div>
           </>
         ) : (
           <div className="no__sub">
             <img src={errorImg} alt="" />
-            <h1 className="no__sub__text">У вас нету подписки</h1>
-            <button onClick={handelModalBuy}>Купить</button>
+            <h1 className="no__sub__text">
+              {info?.lang === "ru"
+                ? "У вас нету подписки"
+                : "You don't have a subscription"}
+            </h1>
+            <button onClick={handelModalBuy}>
+              {info?.lang === "ru" ? "Купить" : "Buy"}
+            </button>
           </div>
         )}
       </div>
@@ -112,12 +151,17 @@ function HomeScreen() {
           <div className="traffic__info">
             <div className="top__wrapper">
               <div className="left__wrapper">
-                <p className="traffic__text">Заргузка</p>
-                <img src={arrowImg} alt="" />
+                <p className="traffic__text">
+                  {info?.lang === "ru" ? "Заргузка" : "Download"}
+                </p>
+                <img src={arrowImg} alt="" className="animate-pulse" />
               </div>
               <div className="right__wrapper">
-                <p className="traffic__text">Отдача</p>
-                <img src={arrowImg} alt="" />
+                <p className="traffic__text">
+                  {" "}
+                  {info?.lang === "ru" ? "Отдача" : "Upload"}
+                </p>
+                <img src={arrowImg} alt="" className="animate-pulse" />
               </div>
             </div>
             <div className="bottom__wrapper">
@@ -128,7 +172,7 @@ function HomeScreen() {
                     : info?.down
                     ? Math.round(info?.down / (1024 * 1024))
                     : null}{" "}
-                  МБ
+                  Mb
                 </p>
               </div>
               <div className="upload">
@@ -138,7 +182,7 @@ function HomeScreen() {
                     : info?.up
                     ? Math.round(info?.up / (1024 * 1024))
                     : null}{" "}
-                  МБ
+                  Mb
                 </p>
               </div>
             </div>

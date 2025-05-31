@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import plusImg from "../assets/plus.svg";
 import { useContext } from "react";
 import { InfoContext } from "../../services/context";
+import WebApp from "@twa-dev/sdk";
 
 function ModalConfiguartion({
   heading,
@@ -11,6 +12,7 @@ function ModalConfiguartion({
   setShowModal,
 }: GlobalModal) {
   const { info } = useContext(InfoContext);
+  const tg = WebApp;
   return (
     <AnimatePresence>
       {showModal && (
@@ -38,11 +40,12 @@ function ModalConfiguartion({
             <div className="modal__bottom__btns">
               <button
                 className="modal__btn"
-                onClick={() =>
+                onClick={() => {
                   navigator.clipboard.writeText(
                     typeof content === "string" ? content : "Error"
-                  )
-                }
+                  );
+                  tg.HapticFeedback.notificationOccurred("success");
+                }}
               >
                 <span>{info?.lang === "ru" ? "Скопировать" : "Copy"}</span>
               </button>

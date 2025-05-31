@@ -1,9 +1,11 @@
 import { Renew } from "../../services/api";
-
 import { GlobalModal } from "../interfaces/interfaces";
 import { motion, AnimatePresence } from "framer-motion";
 import plusImg from "../assets/plus.svg";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+
+import WebApp from "@twa-dev/sdk";
+import { InfoContext } from "../../services/context";
 
 function ModalContinueSub({
   heading,
@@ -16,6 +18,10 @@ function ModalContinueSub({
   const [isError, setIsError] = useState<boolean>(false);
   const [isSucces, setIsSucces] = useState<boolean>(false);
 
+  const tg = WebApp;
+
+  const { info } = useContext(InfoContext);
+
   useEffect(() => {
     setIsLoading(false);
     setIsError(false);
@@ -25,12 +31,18 @@ function ModalContinueSub({
   const plusDays = () => {
     if (addDays < 120) {
       setAddDays((prev) => (prev += 15));
+      tg.HapticFeedback.impactOccurred("soft");
+    } else {
+      tg.HapticFeedback.notificationOccurred("error");
     }
   };
 
   const minusDays = () => {
     if (addDays !== 0) {
       setAddDays((prev) => (prev -= 15));
+      tg.HapticFeedback.impactOccurred("soft");
+    } else {
+      tg.HapticFeedback.notificationOccurred("error");
     }
   };
 
@@ -38,6 +50,7 @@ function ModalContinueSub({
     if (addDays !== 0) {
       setIsLoading(true);
       setIsError(false);
+      tg.HapticFeedback.impactOccurred("soft");
 
       try {
         const buy = await Renew(addDays);
@@ -47,6 +60,7 @@ function ModalContinueSub({
           setIsLoading(false);
           setIsSucces(true);
           setTimeout(() => setIsSucces(false), 2000);
+          tg.HapticFeedback.notificationOccurred("success");
         } else if (buy.status !== 200) {
           throw new Error("Неуспешный ответ сервера");
         }
@@ -54,6 +68,7 @@ function ModalContinueSub({
         setIsError(true);
         setIsLoading(false);
         setTimeout(() => setIsError(false), 2000);
+        tg.HapticFeedback.notificationOccurred("error");
       }
     }
   };
@@ -94,24 +109,34 @@ function ModalContinueSub({
             </button>
             {isSucces ? (
               <>
-                <div className="loading flex justify-center h-[200px] items-center flex-col gap-[40px]">
-                  <h1 className="modal__heading">Успех!</h1>
-                  <div className="loader rounded-full animate-bounce h-[70px] w-[70px] bg-green-800"></div>
+                <div className="loading flex justify-center h-[200px] items-center flex-col gap-[10px]">
+                  <h1 className="modal__heading">
+                    {info?.lang === "ru" ? "Успех!" : "Succses!"}
+                  </h1>
+                  <div className="loader"></div>
                 </div>
               </>
             ) : isLoading ? (
               <>
-                <div className="loading flex justify-center h-[200px] items-center flex-col gap-[40px]">
-                  <h1 className="modal__heading">Заргузка...</h1>
-                  <div className="loader rounded-full animate-bounce h-[70px] w-[70px] bg-white"></div>
+                <div className="loading flex justify-center h-[200px] items-center flex-col gap-[10px]">
+                  <h1 className="modal__heading">
+                    {info?.lang === "ru" ? "Заргузка..." : "Loading..."}
+                  </h1>
+                  <div className="loader "></div>
                 </div>
               </>
             ) : isError === true ? (
               <>
-                <div className="error flex justify-center h-[200px] items-center flex-col gap-[10px]">
-                  <h1 className="modal__heading">Oшибка!</h1>
-                  <p className="modal__content">Перезагрузите приложение!</p>
-                  <div className="error__sign rounded-full animate-bounce h-[70px] w-[70px] bg-red-800"></div>
+                <div className="error flex justify-center h-[200px] items-center flex-col gap-[8px]">
+                  <h1 className="modal__heading">
+                    {info?.lang === "ru" ? "Ошибка!" : "Error!"}
+                  </h1>
+                  <p className="modal__content">
+                    {info?.lang === "ru"
+                      ? "Попробуйте позже!"
+                      : "Try again later!"}
+                  </p>
+                  <div className="loader "></div>
                 </div>
               </>
             ) : (
@@ -124,7 +149,9 @@ function ModalContinueSub({
                       <span>-</span>
                     </button>
                     <div className="sub__days">
-                      <span className="days">{addDays} дней</span>
+                      <span className="days">
+                        {addDays} {info?.lang === "ru" ? "дней" : "days"}
+                      </span>
                     </div>
                     <button className="control__days" onClick={plusDays}>
                       <span>+</span>
@@ -137,7 +164,7 @@ function ModalContinueSub({
                     onClick={handleRenewSub}
                   >
                     <span>
-                      Продлить
+                      {info?.lang === "ru" ? "Продлить" : "Renew for"}
                       {addDays > 0 ? ` ${prices.get(addDays)}` + "₽" : ""}{" "}
                     </span>
                   </button>
