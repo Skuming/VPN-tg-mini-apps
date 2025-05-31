@@ -443,6 +443,32 @@ footer .footer__nav .footer__buttons .nav__text {
   line-height: 0px;
 }
 
+.loader {
+  width: 45px;
+  aspect-ratio: 0.75;
+  --c: no-repeat linear-gradient(#ffffff 0 0);
+  background: var(--c) 0% 100%, var(--c) 50% 100%, var(--c) 100% 100%;
+  background-size: 20% 65%;
+  animation: l8 1s infinite linear;
+}
+
+@keyframes l8 {
+  16.67% {
+    background-position: 0% 0%, 50% 100%, 100% 100%;
+  }
+  33.33% {
+    background-position: 0% 0%, 50% 0%, 100% 100%;
+  }
+  50% {
+    background-position: 0% 0%, 50% 0%, 100% 0%;
+  }
+  66.67% {
+    background-position: 0% 100%, 50% 0%, 100% 0%;
+  }
+  83.33% {
+    background-position: 0% 100%, 50% 100%, 100% 0%;
+  }
+}
 .modal__buy__btns {
   width: 100%;
   gap: 5px;
@@ -467,20 +493,24 @@ footer .footer__nav .footer__buttons .nav__text {
   color: #fff;
 }
 
-.no__funds {
-  position: fixed;
-  top: 5px;
-  width: 90%;
-  height: 50px;
-  background-color: rgba(193, 6, 6, 0.6705882353);
+.popup__buy {
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 999;
-  border: 1px solid #a9a9a9;
   border-radius: 8px;
+  position: fixed;
+  top: 5px;
+  width: 90%;
+  height: 50px;
 }
-.no__funds span {
+.popup__buy.no__funds {
+  background-color: rgba(193, 6, 6, 0.6705882353);
+}
+.popup__buy.succses {
+  background-color: rgba(6, 193, 68, 0.6705882353);
+}
+.popup__buy span {
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
   color: #fff;
@@ -541,11 +571,12 @@ footer .footer__nav .footer__buttons .nav__text {
 .input__container .currency__wrapper .currency__modal {
   top: 43px;
   position: absolute;
-  width: 50px;
+  width: 75px;
   border: 1px solid #a9a9a9;
   border-radius: 8px;
   display: flex;
   gap: 10px;
+  background-color: #000;
   justify-content: center;
   flex-direction: column;
   align-items: center;
@@ -553,7 +584,7 @@ footer .footer__nav .footer__buttons .nav__text {
 }
 .input__container .currency__wrapper .currency__modal button {
   width: 100%;
-  height: 26px;
+  height: 36px;
   cursor: pointer;
 }
 .input__container .currency__wrapper .currency__modal button span {

@@ -24,18 +24,24 @@
   }
 }
 
-.no__funds {
-  position: fixed;
-  top: 5px;
-  width: 90%;
-  height: 50px;
-  background-color: #c10606ab;
+.popup__buy {
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 999;
-  border: $BlockBorder;
   border-radius: $RoundBlock;
+  position: fixed;
+  top: 5px;
+  width: 90%;
+  height: 50px;
+
+  &.no__funds {
+    background-color: #c10606ab;
+  }
+
+  &.succses {
+    background-color: #06c144ab;
+  }
   span {
     font-family: $font;
     font-weight: $SemiBold;

@@ -12,6 +12,7 @@ export interface User {
   down: number;
   expiryTime: number;
   username: string;
+  isOnline: boolean;
 }
 
 export interface InfoContextProps {
