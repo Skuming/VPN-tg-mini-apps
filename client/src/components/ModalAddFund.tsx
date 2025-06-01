@@ -19,14 +19,14 @@ function ModalAddFund({ heading, showModal, setShowModal }: GlobalModal) {
 
   const handleValue = async () => {
     if (Number(inputValue) && /^\d+$/.test(inputValue)) {
-      console.log(inputValue, currency);
+      // console.log(inputValue, currency);
       if (
         (currency === "rub" && Number(inputValue) > 59) ||
         (currency === "star" && Number(inputValue) !== 0)
       ) {
         const invoice = await GetInvoice(Number(inputValue), currency);
 
-        console.log(invoice);
+        // console.log(invoice);
 
         if (invoice.status !== 200) {
           setShowError(true);
@@ -49,7 +49,7 @@ function ModalAddFund({ heading, showModal, setShowModal }: GlobalModal) {
               }, 5000);
               tg.HapticFeedback.notificationOccurred("error");
 
-              console.log(showError);
+              // console.log(showError);
             }
           });
         }
@@ -174,7 +174,9 @@ function ModalAddFund({ heading, showModal, setShowModal }: GlobalModal) {
             exit={{ opacity: 0 }}
           >
             <span>
-              {info?.lang === "ru" ? "Баланс пополнен!" : "Balance is updated!"}
+              {info?.lang === "ru"
+                ? "Успешно! Подождите 10-15 секунд!"
+                : "Succses! Please wait 10-15 seconds!"}
             </span>
           </motion.div>
         )}

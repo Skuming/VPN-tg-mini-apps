@@ -54,7 +54,7 @@ function ModalContinueSub({
 
       try {
         const buy = await Renew(addDays);
-        console.log(buy);
+        // console.log(buy);
 
         if (buy.status === 200) {
           setIsLoading(false);

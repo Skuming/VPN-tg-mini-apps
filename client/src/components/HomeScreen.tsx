@@ -80,7 +80,9 @@ function HomeScreen() {
         </button>
       </div>
       <div className="vpn__info">
-        {info?.have_sub !== 0 && info?.vpn !== null ? (
+        {info?.have_sub !== 0 &&
+        info?.vpn !== null &&
+        (info?.expiryTime !== undefined ? info?.expiryTime : 0) > Date.now() ? (
           <>
             <div className="top__wrapper">
               <h1 className="vpn__info__heading">NetGuard</h1>
@@ -145,7 +147,9 @@ function HomeScreen() {
           </div>
         )}
       </div>
-      {info?.have_sub !== 0 && info?.vpn !== null ? (
+      {info?.have_sub !== 0 &&
+      info?.vpn !== null &&
+      (info?.expiryTime !== undefined ? info?.expiryTime : 0) > Date.now() ? (
         <>
           {" "}
           <div className="traffic__info">

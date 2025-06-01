@@ -14,36 +14,58 @@ function ModalBuyVpn({
 }: GlobalModal) {
   const [showNoFunds, setShowNoFunds] = useState<boolean>(false);
   const [showSuccses, setShowSuccses] = useState<boolean>(false);
+  const [isPresses, setIsPresses] = useState<boolean>(false);
 
   const { info } = useContext(InfoContext);
 
   const handlePlanSelect = async (planId: string) => {
-    try {
-      const buy = await Buy(planId);
-      if (buy.status === 200) {
-        setShowSuccses(true);
-        setTimeout(async () => {
-          await setShowSuccses(false);
-          await setShowModal();
-        }, 5000);
-      }
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
-        if (error.response.status === 403) {
-          setShowNoFunds(true);
-          setTimeout(() => {
-            setShowNoFunds(false);
-          }, 5000);
+    if (isPresses === false) {
+      try {
+        await setIsPresses(true);
+        const buy = await Buy(planId);
+        if (buy.status === 200) {
+          setShowSuccses(true);
+          setTimeout(async () => {
+            await setShowSuccses(false);
+            await setShowModal();
+            await setIsPresses(false);
+          }, 3000);
+        }
+      } catch (error) {
+        await setIsPresses(false);
+        if (error instanceof AxiosError && error.response) {
+          if (error.response.status === 403) {
+            setShowNoFunds(true);
+            setTimeout(() => {
+              setShowNoFunds(false);
+            }, 5000);
+          }
         }
       }
     }
   };
 
   const plans = [
-    { id: "1m", duration: "1 месяц", price: "50₽" },
-    { id: "3m", duration: "3 месяца", price: "150₽" },
-    { id: "6m", duration: "6 месяцев", price: "300₽" },
-    { id: "1y", duration: "1 год", price: "600₽" },
+    {
+      id: "1m",
+      duration: info?.lang === "ru" ? "1 месяц" : "1 month",
+      price: "50₽",
+    },
+    {
+      id: "3m",
+      duration: info?.lang === "ru" ? "3 месяца" : "3 months",
+      price: "150₽",
+    },
+    {
+      id: "6m",
+      duration: info?.lang === "ru" ? "6 месяцев" : "6 months",
+      price: "300₽",
+    },
+    {
+      id: "1y",
+      duration: info?.lang === "ru" ? "1 год" : "1 year",
+      price: "600₽",
+    },
   ];
 
   return (
@@ -64,7 +86,13 @@ function ModalBuyVpn({
               exit={{ y: 20 }}
               transition={{ duration: 0.3 }}
             >
-              <button className="close__btn" onClick={setShowModal}>
+              <button
+                className="close__btn"
+                onClick={() => {
+                  setShowModal();
+                  setIsPresses(false);
+                }}
+              >
                 <span>
                   <img src={plusImg} alt="" />
                 </span>
@@ -74,7 +102,9 @@ function ModalBuyVpn({
                 {plans.map((plan) => (
                   <button
                     key={plan.id}
-                    className={`modal__btn__btn`}
+                    className={`modal__btn__btn ${
+                      isPresses === true ? "opacity-50" : ""
+                    }`}
                     onClick={() => handlePlanSelect(plan.id)}
                   >
                     <span>{plan.duration}</span>
@@ -123,8 +153,8 @@ function ModalBuyVpn({
           >
             <span>
               {info?.lang === "ru"
-                ? "Успешно! Подождите"
-                : "Succses! Please wait!"}
+                ? "Успешно! Подождите 10-15 секунд!"
+                : "Succses! Please wait 10-15 seconds!"}
             </span>
           </motion.div>
         )}
