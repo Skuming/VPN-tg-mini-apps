@@ -31,6 +31,9 @@ app.use(
 app.post("/api/validate", async (req: Request, res: Response) => {
   if (req.body.rawdata !== "") {
     const validateResult = await ValidateInitData(req.body.rawdata);
+    const user: any = await ValidateToken(req.cookies.token);
+    const existToken = req.cookies.token;
+
     if (validateResult.status === 200) {
       const userDBInfo = await GetUserInfo(validateResult.user.id);
       const trafic = await GetTraficData(userDBInfo.user_id);
@@ -39,8 +42,14 @@ app.post("/api/validate", async (req: Request, res: Response) => {
           ? await isonline(validateResult.user.username)
           : "";
 
+      const { id, ...userDBInfoNoID } = await userDBInfo;
+      if (trafic?.expiryTime < Date.now()) {
+        await AddConfig(userDBInfo.user_id, null, userDBInfo.expiry_date, 0);
+        await DeleteClient(userDBInfo.user_id);
+      }
+
       const userInfo3X = {
-        ...userDBInfo,
+        ...userDBInfoNoID,
         photo_url: validateResult.user.photo_url,
         first_name: validateResult.user.first_name,
         lang: validateResult.user.language_code.split("-")[0],
@@ -49,23 +58,39 @@ app.post("/api/validate", async (req: Request, res: Response) => {
         isOnline: isOnline,
       };
       const userInfo = {
-        ...userDBInfo,
+        ...userDBInfoNoID,
         photo_url: validateResult.user.photo_url,
         first_name: validateResult.user.first_name,
         lang: validateResult.user.language_code.split("-")[0],
         username: validateResult.user.username,
       };
-      const token = await CreateToken(userInfo);
+      const token = user !== "error" ? existToken : await CreateToken(userInfo);
 
-      await res
-        .status(validateResult.status)
-        .cookie("token", token, {
-          httpOnly: true,
-          sameSite: "none",
-          secure: true,
-          maxAge: 60 * 60 * 1000,
-        })
-        .send(userDBInfo.have_sub === 1 ? userInfo3X : userInfo);
+      if (user !== "error") {
+        await res
+          .status(validateResult.status)
+          .send(userDBInfo.have_sub === 1 ? userInfo3X : userInfo);
+      } else if (user === "error") {
+        await res
+          .status(validateResult.status)
+          .cookie("token", token, {
+            httpOnly: true,
+            sameSite: "none",
+            secure: true,
+            maxAge: 60 * 60 * 1000,
+          })
+          .send(userDBInfo.have_sub === 1 ? userInfo3X : userInfo);
+      } else {
+        await res
+          .status(validateResult.status)
+          .cookie("token", token, {
+            httpOnly: true,
+            sameSite: "none",
+            secure: true,
+            maxAge: 60 * 60 * 1000,
+          })
+          .send(userDBInfo.have_sub === 1 ? userInfo3X : userInfo);
+      }
     } else {
       await res.status(validateResult.status).send(validateResult.error);
     }
@@ -138,10 +163,11 @@ app.post("/api/buy", async (req, res) => {
       userDBInfo.have_sub === 0
     ) {
       const expiryDate =
-        Date.now() + prices.get(userData)?.date! * 24 * 60 * 60 * 1000;
+        userDBInfo.expiry_date === null
+          ? Date.now() + prices.get(userData)?.date! * 24 * 60 * 60 * 1000
+          : userDBInfo.expiry_date;
 
       const deleteClient = await DeleteClient(userDBInfo.user_id);
-      console.log(deleteClient);
 
       const createSub = await CreateConfig(
         userDBInfo.user_id,
@@ -149,7 +175,7 @@ app.post("/api/buy", async (req, res) => {
         expiryDate
       );
 
-      console.log(await createSub);
+      // console.log(await createSub);
 
       if ((await createSub) === true) {
         const vpn = `vless://${
@@ -158,7 +184,7 @@ app.post("/api/buy", async (req, res) => {
           user.username + expiryDate
         }`;
         await ChangeBalance(userDBInfo.user_id, prices.get(userData)?.price!);
-        await AddConfig(userDBInfo.user_id, vpn, expiryDate);
+        await AddConfig(userDBInfo.user_id, vpn, expiryDate, 1);
         res.status(200).send({ status: "Succses" });
       } else {
         res.status(400).send({ status: "Eternal error!" });
