@@ -78,14 +78,15 @@ export async function AddFund(userID: bigint, price: number) {
 
 export async function AddConfig(
   userID: bigint,
-  vpn: string,
-  expiry_date: number
+  vpn: string | null,
+  expiry_date: number,
+  have_sub: number
 ) {
   const conn = await pool.getConnection();
   try {
     const [result]: any = await conn.query(
-      "UPDATE `users` SET `have_sub`= 1,`vpn`= ?,`expiry_date`= ? WHERE user_id = ?",
-      [vpn, expiry_date, userID]
+      "UPDATE `users` SET `have_sub`= ?,`vpn`= ?,`expiry_date`= ? WHERE user_id = ?",
+      [have_sub, vpn, expiry_date, userID]
     );
     console.log(result);
 
