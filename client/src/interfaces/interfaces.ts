@@ -1,5 +1,4 @@
 export interface User {
-  id: number;
   user_id: bigint;
   balance: string;
   have_sub: number;
