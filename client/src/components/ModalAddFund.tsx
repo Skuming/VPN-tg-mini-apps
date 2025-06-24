@@ -2,6 +2,7 @@ import { GlobalModal } from "../interfaces/interfaces";
 import { useContext, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import plusImg from "../assets/plus.svg";
+import coinImg from "../assets/coin.svg";
 import WebApp from "@twa-dev/sdk";
 import { GetInvoice } from "../../services/api";
 import { InfoContext } from "../../services/context";
@@ -19,14 +20,11 @@ function ModalAddFund({ heading, showModal, setShowModal }: GlobalModal) {
 
   const handleValue = async () => {
     if (Number(inputValue) && /^\d+$/.test(inputValue)) {
-      // console.log(inputValue, currency);
       if (
         (currency === "rub" && Number(inputValue) > 59) ||
         (currency === "star" && Number(inputValue) !== 0)
       ) {
         const invoice = await GetInvoice(Number(inputValue), currency);
-
-        // console.log(invoice);
 
         if (invoice.status !== 200) {
           setShowError(true);
@@ -48,8 +46,6 @@ function ModalAddFund({ heading, showModal, setShowModal }: GlobalModal) {
                 setShowError(false);
               }, 5000);
               tg.HapticFeedback.notificationOccurred("error");
-
-              // console.log(showError);
             }
           });
         }
@@ -121,7 +117,7 @@ function ModalAddFund({ heading, showModal, setShowModal }: GlobalModal) {
                 </div>
                 <div className="currency__wrapper">
                   <button className="currency" onClick={handleShowCurrModal}>
-                    <span>⬇</span>
+                    <img src={coinImg} alt="" className="h-[80%]" />
                   </button>
                   {showCurrModal && (
                     <div className="currency__modal">

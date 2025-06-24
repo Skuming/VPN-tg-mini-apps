@@ -17,6 +17,7 @@ import {
 
 import isonline from "./handlers/3xui/isonline";
 import StartBot from "./bot/bot";
+import path from "path";
 
 StartBot();
 
@@ -24,8 +25,9 @@ const app = express();
 
 app.use(
   express.json(),
-  cors({ origin: "https://my-mini-apps-vpn.loca.lt", credentials: true }), // On production change to real domain
-  cookieParser()
+  cors({ origin: "https://network-guard.site/", credentials: true }), // On production change to real domain
+  cookieParser(),
+  express.static(path.join(__dirname, "../dist"))
 );
 
 app.post("/api/validate", async (req: Request, res: Response) => {
@@ -163,9 +165,7 @@ app.post("/api/buy", async (req, res) => {
       userDBInfo.have_sub === 0
     ) {
       const expiryDate =
-        userDBInfo.expiry_date === null
-          ? Date.now() + prices.get(userData)?.date! * 24 * 60 * 60 * 1000
-          : userDBInfo.expiry_date;
+        Date.now() + prices.get(userData)?.date! * 24 * 60 * 60 * 1000;
 
       const deleteClient = await DeleteClient(userDBInfo.user_id);
 
@@ -175,12 +175,10 @@ app.post("/api/buy", async (req, res) => {
         expiryDate
       );
 
-      // console.log(await createSub);
+      console.log("CREATE SUB", createSub);
 
       if ((await createSub) === true) {
-        const vpn = `vless://${
-          userDBInfo.user_id
-        }@185.184.121.34:443?type=tcp&security=reality&pbk=SDWm7vRdRuCKMoTIpNs9DvZWB2Ct-kLPnI2Z58Np7RQ&fp=chrome&sni=yahoo.com&sid=2cd590&spx=%2F#reality-${
+        const vpn = `vless://${userDBInfo.user_id}${process.env.PATH}${
           user.username + expiryDate
         }`;
         await ChangeBalance(userDBInfo.user_id, prices.get(userData)?.price!);

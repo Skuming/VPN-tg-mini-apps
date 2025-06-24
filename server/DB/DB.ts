@@ -47,7 +47,7 @@ export async function ChangeBalance(userID: bigint, price: number) {
       "UPDATE `users` SET `balance` = balance - ? WHERE `user_id` = ?;",
       [price, userID]
     );
-    console.log(result);
+    // console.log(result);
 
     return result[0];
   } catch (error) {
@@ -65,7 +65,7 @@ export async function AddFund(userID: bigint, price: number) {
       "UPDATE `users` SET `balance` = balance + ? WHERE `user_id` = ?;",
       [price, userID]
     );
-    console.log(result);
+    // console.log(result);
 
     return result[0];
   } catch (error) {
@@ -88,7 +88,7 @@ export async function AddConfig(
       "UPDATE `users` SET `have_sub`= ?,`vpn`= ?,`expiry_date`= ? WHERE user_id = ?",
       [have_sub, vpn, expiry_date, userID]
     );
-    console.log(result);
+    // console.log(result);
 
     return result[0];
   } catch (error) {

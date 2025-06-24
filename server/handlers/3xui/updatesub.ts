@@ -32,7 +32,7 @@ async function UpdateSub(
     const updateClientResponse = await axios.post(
       `http://${process.env.SERVER_3X}/panel/api/inbounds/updateClient/${userID}`,
       {
-        id: 1,
+        id: Number(process.env.PANEL_ID),
         settings: JSON.stringify({
           clients: [
             {
@@ -58,7 +58,7 @@ async function UpdateSub(
       }
     );
 
-    console.log(await updateClientResponse);
+    // console.log(await updateClientResponse);
   } catch (error) {
     console.log(error);
   }

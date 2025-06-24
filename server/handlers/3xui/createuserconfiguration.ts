@@ -29,7 +29,7 @@ async function CreateConfig(
     const createConfigResponse = await axios.post(
       `http://${process.env.SERVER_3X}/panel/api/inbounds/addClient`,
       {
-        id: 1,
+        id: Number(process.env.PANEL_ID),
         settings: JSON.stringify({
           clients: [
             {
@@ -54,7 +54,7 @@ async function CreateConfig(
         },
       }
     );
-    console.log(createConfigResponse.status);
+    // console.log(createConfigResponse.status);
     if (createConfigResponse.status === 200) {
       return true;
     }

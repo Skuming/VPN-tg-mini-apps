@@ -23,7 +23,9 @@ export default async function DeleteClient(userID: bigint) {
     }
 
     const deleteClient = await axios.post(
-      `http://${process.env.SERVER_3X}/panel/api/inbounds/1/delClient/${userID}`,
+      `http://${process.env.SERVER_3X}/panel/api/inbounds/${Number(
+        process.env.PANEL_ID
+      )}/delClient/${userID}`,
       {},
       {
         headers: {

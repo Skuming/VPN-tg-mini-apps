@@ -33,7 +33,7 @@ function Footer() {
         <a href="#" className="footer__buttons">
           <img src={homeImg} alt="" />
           <p className="nav__text">
-            {info?.lang === "ru" ? "Главнвя" : "Home"}
+            {info?.lang === "ru" ? "Главная" : "Home"}
           </p>
         </a>
         <a

@@ -14,7 +14,7 @@ export default function StartBot() {
       caption: lang === "ru" ? text.startRU : text.startENG,
       reply_markup: new InlineKeyboard().webApp(
         `${lang === "ru" ? "Открыть" : "Open"}`,
-        "https://my-mini-apps-vpn.loca.lt"
+        "https://network-guard.site/"
       ),
     });
   });
@@ -34,28 +34,28 @@ export default function StartBot() {
     );
   });
 
-  bot.command("refund", async (ctx) => {
-    try {
-      const transactionId = ctx.message?.text.split(" ")[1]; // /refund <transaction_id>
+  // bot.command("refund", async (ctx) => {
+  //   try {
+  //     const transactionId = ctx.message?.text.split(" ")[1]; // /refund <transaction_id>
 
-      if (!transactionId) {
-        await ctx.reply(
-          "Укажите идентификатор транзакции: /refund <transaction_id>"
-        );
-        return;
-      }
+  //     if (!transactionId) {
+  //       await ctx.reply(
+  //         "Укажите идентификатор транзакции: /refund <transaction_id>"
+  //       );
+  //       return;
+  //     }
 
-      await bot.api.refundStarPayment(ctx.from?.id!, transactionId);
-      await ctx.reply(
-        `Возврат средств для транзакции ${transactionId} выполнен успешно.`
-      );
-    } catch (error) {
-      console.error("Ошибка при возврате средств:", error);
-      await ctx.reply(
-        "Произошла ошибка при возврате средств. Попробуйте позже."
-      );
-    }
-  });
+  //     await bot.api.refundStarPayment(ctx.from?.id!, transactionId);
+  //     await ctx.reply(
+  //       `Возврат средств для транзакции ${transactionId} выполнен успешно.`
+  //     );
+  //   } catch (error) {
+  //     console.error("Ошибка при возврате средств:", error);
+  //     await ctx.reply(
+  //       "Произошла ошибка при возврате средств. Попробуйте позже."
+  //     );
+  //   }
+  // });
 
   bot.on("pre_checkout_query", async (ctx) => {
     const isValid = true;

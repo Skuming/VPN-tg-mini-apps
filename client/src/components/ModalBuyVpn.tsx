@@ -119,7 +119,9 @@ function ModalBuyVpn({
                   target="_blank"
                   className="text-blue-500"
                 >
-                  соглашаетесь с правилами
+                  {info?.lang === "ru"
+                    ? "соглашаетесь с правилами"
+                    : "agree to the rules"}
                 </a>
               </i>
             </motion.div>

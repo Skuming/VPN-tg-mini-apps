@@ -82,7 +82,7 @@ function HomeScreen() {
       <div className="vpn__info">
         {info?.have_sub !== 0 &&
         info?.vpn !== null &&
-        (info?.expiryTime !== undefined ? info?.expiryTime : 0) > Date.now() ? (
+        (info?.expiryTime !== undefined ? info?.expiryTime : 0) ? (
           <>
             <div className="top__wrapper">
               <h1 className="vpn__info__heading">NetGuard</h1>
@@ -118,11 +118,11 @@ function HomeScreen() {
                     {info?.lang === "ru" ? "Конфигурация" : "Configuration"}
                   </span>
                 </button>
-                <button className="vpn__button">
+                <a href="http://t.me/Network_guard_bot" className="vpn__button">
                   <span className="vpn__btn__text">
                     {info?.lang === "ru" ? "Перейти в бота" : "Go to bot"}
                   </span>
-                </button>
+                </a>
               </div>
               <button className="vpn__large__button" onClick={handleModalSub}>
                 <span className="vpn__btn__text">
@@ -149,7 +149,7 @@ function HomeScreen() {
       </div>
       {info?.have_sub !== 0 &&
       info?.vpn !== null &&
-      (info?.expiryTime !== undefined ? info?.expiryTime : 0) > Date.now() ? (
+      (info?.expiryTime !== undefined ? info?.expiryTime : 0) ? (
         <>
           {" "}
           <div className="traffic__info">
@@ -197,22 +197,30 @@ function HomeScreen() {
         ""
       )}
       <ModalConfiguartion
-        heading="Конфигурация"
+        heading={info?.lang === "ru" ? "Конфигурация" : "Configuration"}
         content={info?.vpn}
         setShowModal={handleModalConf}
         showModal={showModal}
       ></ModalConfiguartion>
 
       <ModalContinueSub
-        heading="Продлить подписку"
-        content="Выберите продолжительность"
+        heading={info?.lang === "ru" ? "Продлить подписку" : "Renew sub"}
+        content={
+          info?.lang === "ru"
+            ? "Выберите продолжительность"
+            : "Select the duration"
+        }
         setShowModal={handleModalSub}
         showModal={showModalSub}
       />
 
       <ModalBuyVpn
         heading={info?.lang === "ru" ? "Покупка" : "Buy"}
-        content={"*Преобретая данную услуг вы "}
+        content={
+          info?.lang === "ru"
+            ? "*Преобретая данную услуг вы "
+            : "*By purchasing this service, you "
+        }
         setShowModal={handelModalBuy}
         showModal={showModalBuy}
       />

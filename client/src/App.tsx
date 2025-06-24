@@ -17,6 +17,16 @@ function App() {
       </div>
     );
   }
+
+  if (!info.username) {
+    return (
+      <div className="h-screen flex items-center justify-center">
+        <div className="rounded-full bg-white w-[100px] h-[100px] animate-bounce"></div>
+        <h1>Set username in telegram!</h1>
+      </div>
+    );
+  }
+
   return (
     <>
       <Home></Home>

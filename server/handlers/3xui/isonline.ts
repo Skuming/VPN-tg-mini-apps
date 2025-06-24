@@ -28,7 +28,7 @@ async function isonline(username: string) {
       {
         headers: {
           "Content-Type": "application/json",
-          Cookie: cookies[1], // Передаём куки в headers, а не в data
+          Cookie: cookies[1],
         },
       }
     );

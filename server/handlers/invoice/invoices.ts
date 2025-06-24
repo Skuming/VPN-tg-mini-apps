@@ -29,8 +29,31 @@ export async function CreateRubInvoice(amount: number, chatID: number) {
       currency: "RUB",
       prices: [{ label: "Пополнение NetGuard", amount: amount + "00" }],
       provider_token: process.env.PROVIDER_TOKEN,
+      need_email: true,
+      send_email_to_provider: true,
+      provider_data: JSON.stringify({
+        receipt: {
+          customer: {},
+          items: [
+            {
+              description: "Пополнение баланса NetGuard",
+              quantity: 1.0,
+              amount: {
+                value: amount,
+                currency: "RUB",
+              },
+              vat_code: 1,
+              payment_mode: "full_payment",
+              payment_subject: "service",
+            },
+          ],
+          tax_system_code: 1,
+        },
+      }),
     }
   );
+
+  console.log(response);
 
   return await response.data.result;
 }
