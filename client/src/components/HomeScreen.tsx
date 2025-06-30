@@ -156,7 +156,7 @@ function HomeScreen() {
             <div className="top__wrapper">
               <div className="left__wrapper">
                 <p className="traffic__text">
-                  {info?.lang === "ru" ? "Заргузка" : "Download"}
+                  {info?.lang === "ru" ? "Загрузка" : "Download"}
                 </p>
                 <img src={arrowImg} alt="" className="animate-pulse" />
               </div>

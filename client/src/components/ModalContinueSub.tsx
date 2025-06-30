@@ -119,7 +119,7 @@ function ModalContinueSub({
               <>
                 <div className="loading flex justify-center h-[200px] items-center flex-col gap-[10px]">
                   <h1 className="modal__heading">
-                    {info?.lang === "ru" ? "Заргузка..." : "Loading..."}
+                    {info?.lang === "ru" ? "Загрузка..." : "Loading..."}
                   </h1>
                   <div className="loader "></div>
                 </div>

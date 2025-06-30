@@ -12,10 +12,16 @@ export default function StartBot() {
 
     await ctx.replyWithPhoto(new InputFile("../server/bot/img/start.png"), {
       caption: lang === "ru" ? text.startRU : text.startENG,
-      reply_markup: new InlineKeyboard().webApp(
-        `${lang === "ru" ? "Открыть" : "Open"}`,
-        "https://network-guard.site/"
-      ),
+      reply_markup: new InlineKeyboard()
+        .webApp(
+          `${lang === "ru" ? "Открыть" : "Open"}`,
+          "https://network-guard.site/"
+        )
+        .row()
+        .url(
+          `${lang === "ru" ? "Поддержка" : "Support"}`,
+          "https://t.me/+YmnsnelLKgxhN2My"
+        ),
     });
   });
 

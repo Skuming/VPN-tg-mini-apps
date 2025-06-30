@@ -20,9 +20,9 @@ function App() {
 
   if (!info.username) {
     return (
-      <div className="h-screen flex items-center justify-center">
+      <div className="h-screen flex items-center justify-center flex-col gap-1">
         <div className="rounded-full bg-white w-[100px] h-[100px] animate-bounce"></div>
-        <h1>Set username in telegram!</h1>
+        <h1 className="text-2xl text-white">Set username in telegram!</h1>
       </div>
     );
   }

@@ -157,7 +157,7 @@ app.post("/api/buy", async (req, res) => {
     ["1y", { price: 600, date: 360 }],
   ]);
 
-  if (user !== "error") {
+  if (user !== "error" && user.username) {
     const userDBInfo = await GetUserInfo(user.user_id);
     if (
       prices.has(userData) &&
