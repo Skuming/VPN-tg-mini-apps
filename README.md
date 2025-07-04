@@ -1,4 +1,6 @@
-# Vpn mini-apps for [my bot](https://t.me/CokiVPN_Bot)
+ ~~# Vpn mini-apps for [my bot](https://t.me/CokiVPN_Bot)~~
+
+# THE [BOT](https://t.me/Network_guard_bot) IS REALISED 
 
 ## The bot it's not renamed yet (08.05.2025), but it`s gonna be **RENAMED** as soon as project is done
 
